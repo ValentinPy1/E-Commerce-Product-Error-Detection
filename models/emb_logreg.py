@@ -50,17 +50,33 @@ class SentenceEmbLogReg(BaseModel):
     def save(self, dir_path: str) -> None:
         os.makedirs(dir_path, exist_ok=True)
         # Save only the classifier and label encoder; encoder is referenced by name
+        encoder_name = None
+        try:
+            fm = self.encoder._first_module() if hasattr(self.encoder, '_first_module') else None
+            if fm is not None:
+                encoder_name = getattr(fm, 'model_name', None)
+                if encoder_name is None:
+                    auto_model = getattr(fm, 'auto_model', None)
+                    if auto_model is not None:
+                        encoder_name = getattr(auto_model, 'name_or_path', None)
+                        if encoder_name is None:
+                            cfg = getattr(auto_model, 'config', None)
+                            if cfg is not None:
+                                encoder_name = getattr(cfg, 'name_or_path', None) or getattr(cfg, '_name_or_path', None)
+        except Exception:
+            encoder_name = None
         joblib.dump({
             'classifier': self.clf,
             'label_encoder': self.le,
             'classes': self.classes_,
-            'encoder_name': self.encoder._first_module().name if hasattr(self.encoder, '_first_module') else None,
+            'encoder_name': encoder_name,
         }, os.path.join(dir_path, 'emb_logreg.joblib'))
 
     @classmethod
     def load(cls, dir_path: str) -> "SentenceEmbLogReg":
         data = joblib.load(os.path.join(dir_path, 'emb_logreg.joblib'))
-        obj = cls()
+        model_name = data.get('encoder_name') or 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2'
+        obj = cls(model_name=model_name)
         obj.clf = data['classifier']
         obj.le = data['label_encoder']
         obj.classes_ = data['classes']

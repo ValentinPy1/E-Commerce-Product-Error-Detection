@@ -67,19 +67,36 @@ class KNNConformity(BaseModel):
 
     def save(self, dir_path: str) -> None:
         os.makedirs(dir_path, exist_ok=True)
+        # Try to recover a stable encoder model name
+        encoder_name = None
+        try:
+            fm = self.encoder._first_module() if hasattr(self.encoder, '_first_module') else None
+            if fm is not None:
+                encoder_name = getattr(fm, 'model_name', None)
+                if encoder_name is None:
+                    auto_model = getattr(fm, 'auto_model', None)
+                    if auto_model is not None:
+                        encoder_name = getattr(auto_model, 'name_or_path', None)
+                        if encoder_name is None:
+                            cfg = getattr(auto_model, 'config', None)
+                            if cfg is not None:
+                                encoder_name = getattr(cfg, 'name_or_path', None) or getattr(cfg, '_name_or_path', None)
+        except Exception:
+            encoder_name = None
         joblib.dump({
             'nn_params': self.nn.get_params(),
             'train_embeddings': self._train_embeddings,
             'y_train': self.y_train,
             'label_encoder': self.le,
             'classes': self.classes_,
-            'encoder_name': self.encoder._first_module().name if hasattr(self.encoder, '_first_module') else None,
+            'encoder_name': encoder_name,
         }, os.path.join(dir_path, 'knn_conformity.joblib'))
 
     @classmethod
     def load(cls, dir_path: str) -> "KNNConformity":
         data = joblib.load(os.path.join(dir_path, 'knn_conformity.joblib'))
-        obj = cls()
+        model_name = data.get('encoder_name') or 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2'
+        obj = cls(model_name=model_name)
         obj.nn.set_params(**data['nn_params'])
         obj._train_embeddings = data['train_embeddings']
         obj.y_train = data['y_train']

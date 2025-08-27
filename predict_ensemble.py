@@ -60,19 +60,36 @@ def main():
     classes = sorted(list(set(all_classes)))
     idx_map = {c: i for i, c in enumerate(classes)}
 
-    probas = []
+    probas_aligned = []
+    # store per-model predictions and confidences
+    per_model_preds = {}
+    per_model_confs = {}
     for name, m in models:
         p = m.predict_proba(texts)
+        # per-model predicted class and confidence
+        pm_idx = np.argmax(p, axis=1)
+        pm_pred = [m.classes_[i] for i in pm_idx]
+        pm_conf = np.max(p, axis=1)
+        per_model_preds[name] = pm_pred
+        per_model_confs[name] = pm_conf
+        # align for ensemble averaging
         aligned = np.zeros((len(texts), len(classes)), dtype=np.float64)
         for j, c in enumerate(m.classes_):
             aligned[:, idx_map[c]] = p[:, j]
-        probas.append(aligned)
+        probas_aligned.append(aligned)
 
-    avg = np.mean(np.stack(probas, axis=0), axis=0)
-    preds = [classes[i] for i in np.argmax(avg, axis=1)]
+    avg = np.mean(np.stack(probas_aligned, axis=0), axis=0)
+    ensemble_idx = np.argmax(avg, axis=1)
+    preds = [classes[i] for i in ensemble_idx]
+    ensemble_conf = np.max(avg, axis=1)
 
     out = df.copy()
     out['ensemble_pred'] = preds
+    out['ensemble_conf'] = ensemble_conf
+    # append per-model columns
+    for name in per_model_preds:
+        out[f'{name}_pred'] = per_model_preds[name]
+        out[f'{name}_conf'] = per_model_confs[name]
     out.to_csv(args.output_csv, index=False)
     print('Saved predictions to', args.output_csv)
 

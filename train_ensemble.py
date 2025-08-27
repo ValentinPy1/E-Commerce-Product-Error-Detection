@@ -7,7 +7,7 @@ from ensemble import EnsemblePipeline, EnsembleConfig
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='unique_products.csv')
+    parser.add_argument('--data', type=str, default='data/unique_products.csv')
     parser.add_argument('--label_column', type=str, default='Libellé produit')
     parser.add_argument('--target_column', type=str, default='Nature')
     parser.add_argument('--tfidf', action='store_true')
