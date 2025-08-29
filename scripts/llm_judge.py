@@ -13,6 +13,7 @@ from pathlib import Path
 import pandas as pd
 from tqdm import tqdm
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+import numpy as np
 
 try:
     from dotenv import load_dotenv
@@ -67,12 +68,16 @@ class OpenAIJudge:
     @retry(stop=stop_after_attempt(5), wait=wait_exponential(min=1, max=30), reraise=True)
     def judge_one(self, label_text: str, official_nature: str, model_name: str, model_pred: str) -> Dict[str, str]:
         messages = self._build_messages(label_text, official_nature, model_name, model_pred)
-        resp = self.client.chat.completions.create(
-            model=self.cfg.model,
-            messages=messages,
-            temperature=self.cfg.temperature,
-            response_format={"type": "json_object"},
-        )
+        # Some models don't support temperature=0.0, so we omit it for those
+        kwargs = {
+            "model": self.cfg.model,
+            "messages": messages,
+            "response_format": {"type": "json_object"},
+        }
+        # Only add temperature if it's not 0.0 (which some models don't support)
+        if self.cfg.temperature != 0.0:
+            kwargs["temperature"] = self.cfg.temperature
+        resp = self.client.chat.completions.create(**kwargs)
         raw = resp.choices[0].message.content or "{}"
         try:
             data = json.loads(raw)
@@ -102,7 +107,7 @@ def run():
     parser.add_argument("--provider", type=str, default="openai")
     parser.add_argument("--model", type=str, default="gpt-5-mini-2025-08-07")
     parser.add_argument("--api_key_env", type=str, default="OPENAI_API_KEY")
-    parser.add_argument("--max_per_model", type=int, default=500)
+    parser.add_argument("--samples_per_model", type=int, default=100, help="Number of samples to judge per model")
     parser.add_argument("--sleep", type=float, default=0.0)
     parser.add_argument("--out_dir", type=str, default="./artifacts/llm_judgments")
     args = parser.parse_args()
@@ -121,22 +126,57 @@ def run():
 
     for model_name in models:
         pred_col = f"{model_name}_pred"
+        conf_col = f"{model_name}_conf"
         if pred_col not in df.columns:
             continue
 
-        # Disagreements only; equal implies both correct (no LLM needed)
+        # Get disagreements only
         mask = df[pred_col].notna() & (df[pred_col].astype(str) != df[args.target_column].astype(str))
         sub = df.loc[mask, [args.label_column, args.target_column, pred_col]].copy()
+        
+        # Add confidence column if available
+        if conf_col in df.columns:
+            sub[conf_col] = df.loc[mask, conf_col]
+        
         if sub.empty:
             continue
 
-        # Limit
-        sub = sub.head(args.max_per_model)
+        # Sample evenly across confidence ranges
+        if conf_col in sub.columns and len(sub) > args.samples_per_model:
+            # Create confidence bins and sample evenly from each
+            sub['conf_bin'] = pd.cut(sub[conf_col], bins=10, labels=False, include_lowest=True)
+            sampled_indices = []
+            
+            for bin_idx in range(10):
+                bin_mask = sub['conf_bin'] == bin_idx
+                bin_size = bin_mask.sum()
+                if bin_size > 0:
+                    # Sample proportionally from this bin
+                    samples_from_bin = max(1, int(args.samples_per_model * bin_size / len(sub)))
+                    bin_indices = sub[bin_mask].index.tolist()
+                    sampled_from_bin = np.random.choice(bin_indices, size=min(samples_from_bin, len(bin_indices)), replace=False)
+                    sampled_indices.extend(sampled_from_bin)
+            
+            # If we didn't get enough samples, add random ones
+            if len(sampled_indices) < args.samples_per_model:
+                remaining_indices = [idx for idx in sub.index if idx not in sampled_indices]
+                additional_needed = args.samples_per_model - len(sampled_indices)
+                if remaining_indices:
+                    additional_indices = np.random.choice(remaining_indices, size=min(additional_needed, len(remaining_indices)), replace=False)
+                    sampled_indices.extend(additional_indices)
+            
+            # Take exactly the requested number
+            sampled_indices = sampled_indices[:args.samples_per_model]
+            sub = sub.loc[sampled_indices]
+        else:
+            # If no confidence or not enough data, just take the first N
+            sub = sub.head(args.samples_per_model)
 
         out_path = os.path.join(args.out_dir, f"{model_name}_judgments.csv")
         with open(out_path, "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(["label", "official_nature", "model", "model_pred", "verdict", "explanation"])
+            cols = ["label", "official_nature", "model", "model_pred", "model_conf", "verdict", "explanation"]
+            writer.writerow(cols)
 
             correct_model = 0
             correct_nature = 0
@@ -147,13 +187,15 @@ def run():
                 label_text = str(row[args.label_column])
                 official = str(row[args.target_column])
                 model_pred = str(row[pred_col])
+                model_conf = float(row.get(conf_col, np.nan)) if conf_col in row else np.nan
+                
                 try:
                     result = judge.judge_one(label_text, official, model_name, model_pred)
                 except Exception as e:
                     result = {"verdict": "error", "explanation": str(e)}
                 verdict = result.get("verdict", "error")
                 expl = result.get("explanation", "")
-                writer.writerow([label_text, official, model_name, model_pred, verdict, expl])
+                writer.writerow([label_text, official, model_name, model_pred, model_conf, verdict, expl])
 
                 if verdict == "model":
                     correct_model += 1
@@ -170,17 +212,18 @@ def run():
         # Add trivial equals (where model==nature) as both-correct
         equal_count = int((df[pred_col].astype(str) == df[args.target_column].astype(str)).sum())
         total_judged = len(sub)
-        total = int(mask.sum()) + equal_count
+        total_disagreements = int(mask.sum())
 
         summary_rows.append({
             "model": model_name,
             "equal_both_correct": equal_count,
-            "judged_total": total_judged,
+            "total_disagreements": total_disagreements,
+            "judged_sample_size": total_judged,
             "verdict_model": correct_model,
             "verdict_nature": correct_nature,
             "verdict_both_wrong": both_wrong,
             "verdict_error": errors,
-            "overall_total_considered": total,
+            "model_accuracy_in_disagreements": correct_model / total_judged if total_judged > 0 else 0,
         })
 
     summary_df = pd.DataFrame(summary_rows)

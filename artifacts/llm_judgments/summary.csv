@@ -1,2 +1,6 @@
-model,equal_both_correct,judged_total,verdict_model,verdict_nature,verdict_both_wrong,verdict_error,overall_total_considered
-ensemble,0,100,0,0,0,100,100
+model,equal_both_correct,total_disagreements,judged_sample_size,verdict_model,verdict_nature,verdict_both_wrong,verdict_error,model_accuracy_in_disagreements
+knn_conformity,36925,19093,10,1,9,0,0,0.1
+ensemble,44579,11439,10,3,6,1,0,0.3
+tfidf_logreg_cleanlab,46701,9317,10,4,6,0,0,0.4
+sent_emb_logreg,41355,14663,10,5,4,1,0,0.5
+camembert_logreg,39789,16229,10,7,3,0,0,0.7
