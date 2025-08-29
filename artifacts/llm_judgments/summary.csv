@@ -1,0 +1,2 @@
+model,equal_both_correct,judged_total,verdict_model,verdict_nature,verdict_both_wrong,verdict_error,overall_total_considered
+ensemble,0,100,0,0,0,100,100

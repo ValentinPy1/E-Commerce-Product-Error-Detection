@@ -1,0 +1,11 @@
+Libellé produit,Nature,camembert_logreg_pred,camembert_logreg_conf,ensemble_pred,ensemble_conf,knn_conformity_pred,knn_conformity_conf,sent_emb_logreg_pred,sent_emb_logreg_conf,tfidf_logreg_cleanlab_pred,tfidf_logreg_cleanlab_conf
+Ruban led 5m 5050 ip20 rgb 14w m dc12v 60led m,Guirlande lumineuse,Ampoule,0.0821860534393442,Centrale vapeur,0.0804879143189155,Centrale vapeur,0.3,Tv ecran plat,0.0413505356292301,Guirlande lumineuse,0.1172366050593146
+Marmite avec rev tement en marbre d 32 cm noir,Casserole,Objet deco,0.0877472896386307,Sommier,0.0905025046580685,Sommier,0.35,Plafonnier,0.064357890534062,Casserole,0.0478517503795044
+Plateau de service antidérapant x3 design loft métal,Plateau,Bureau,0.1564765495805482,Etagère,0.0760372236642898,Penderie,0.15,Etagère,0.2340181050558333,Plateau,0.1148893131356742
+Bouée gonflable licorne diam 104 cm,Structure gonflable,Linge de table,0.0822501624889924,Rideau,0.0995158569403641,Rideau,0.3,Vaisselle,0.1289678515545079,Structure gonflable,0.0727972324187205
+Tuyau à air automatique ribitech de 15 mètres 17 mm,Arrosage,Pièces détachées,0.0459781848206133,Accessoire jardin,0.0473442246754641,Tapis de Salon et Ch,0.15,Horloge,0.0457270558154318,Arrosage,0.0614369431403568
+Quam clé usb 16go mister wonderful licorne,Cle usb,Objet deco,0.0303720000798958,Lit jeune,0.0540401415233876,Lit jeune,0.2,Peluche,0.0636898647046629,Cle usb,0.1335911915788845
+Taurus réchaud 2 plaques volcano duo,Rechaud,Plaque de cuisson,0.0434571469699756,Evier,0.0779926970842608,Evier,0.3,Accessoire jeu vidéo,0.0480749505543816,Rechaud,0.0549850487771371
+ tagère hwc b55 bambou bois de pin 3 étages,Rangement sdb,Etagère,0.2449005913117497,Etagère,0.1875733749043477,Sommier,0.2,Etagère,0.3120956330399194,Rangement sdb,0.2692161462411123
+Cuiseur COOKEO + économe,Cuiseur vapeur,Casserole,0.0863195973410712,Ustensiles,0.1093495077163066,Poubelle cuisine,0.25,Ustensiles,0.1331748658076225,Cuiseur vapeur,0.0640391933335135
+Tréteau en pin pro 50 de large section 50x23 mm,Bureau,Objet deco,0.0465949797980679,Drap housse,0.0901406460520244,Drap housse,0.35,Parure de lit,0.0804989653247842,Bureau,0.1063356197999802

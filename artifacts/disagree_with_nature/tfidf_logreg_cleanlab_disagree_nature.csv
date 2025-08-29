@@ -1,0 +1,101 @@
+Libellé produit,Nature,tfidf_logreg_cleanlab_pred,tfidf_logreg_cleanlab_conf,ensemble_pred,ensemble_conf
+Coussin 40x40 cm,Coussin,Housse de coussin,0.2697926553199082,Coussin,0.5848368912837582
+Tectake tente familiale 6 places gris clair gris foncé,Matériel camping,Salon de jardin,0.0669946506926087,Friteuse,0.1042192646316676
+Canapé d angle gauche convertible santiago gris,Friteuse,Canapé d'angle,0.6337031331009854,Canapé d'angle,0.7708931672540908
+Lena canapé d angle en tissu bleu canard convertible modulable angle droit,Friteuse,Canapé d'angle,0.6922709576115199,Canapé d'angle,0.7759725754048536
+Rideau de douche modele madison,Abattant wc,Rideau de douche,0.2577258167443652,Rideau de douche,0.3736533095672606
+Chaise longue hwc d80 en polyrotin anthracite coussin beige,Bain de soleil,Chaise,0.1745658865186908,Chaise,0.1788334491521904
+Songmics filet de remplacement de trampoline diamètre 366 cm filet de sécurité pour 6 poteaux droits filet rond stn12ft,Accessoire jeux ext,Trampoline,0.4905615731096714,Trampoline,0.368232970785925
+Meuble sous vasque sonoma blanc 60 8 x 60 x 33 cm hxlxp ,Rangement sdb,Element bas SDB,0.2391723054303219,Cadre à lattes,0.1795148584324324
+S che linge ouverture hublot,Seche linge,Lave linge,0.1593971802564786,Seche linge,0.1156029352793504
+Atmosphera bac à linge laverie rose h 54 cm,Panier,Lampe,0.0687414449933671,Lave linge,0.2830232545871189
+Silverstone sst st50f es 230 strider essential series,Boitier alim PC,Ustensiles,0.0174602400423705,Mini four,0.0519929215037998
+ folke vintage canapé d angle réversible convertible style scandinave rétro microfibre marron vieilli ,Friteuse,Canapé d'angle,0.5117101355402086,Canapé d'angle,0.4898639891051025
+Brosse à dents électrique oral b pro600 cross action,Accessoire sdb,Hygiene dentaire,0.2232740816888458,Hygiene dentaire,0.3429885363204863
+Matelas bultex inox 120x200 mousse,Meuble à chaussures,Matelas,0.5971498099123269,Matelas,0.7242330344826
+Raccord pied télévision lg maz63709002,Accessoire vidéoproj,Tv ecran plat,0.047406683554088,Tv ecran plat,0.1887245602038882
+Meuble bas 1 porte et 1 tiroir,Element bas SDB,Meuble bas cuisine,0.4808759662143491,Meuble bas cuisine,0.5115373872793553
+ tagère bois noir gota 75x100 atmosphera,Bibliotheque,Etagère,0.230181262857897,Etagère,0.1964609567476294
+Table de cuisine table haute de bar table 110x50x80cm sobuy fsb28 dn,Buffet de cuisine,Table,0.4183180550964568,Table,0.5171146300057805
+Miroir de salle à manger carré coloris ch ne saphir,Miroir,Chaise,0.1922487391484866,Table,0.1206076594980617
+Armoire adulte moderne 200 cm ch ne noir france,Structure armoire,Lit adulte,0.3161121859209564,Lit adulte,0.1486888571947896
+Giantex armoire de rangement penderie de v tement portable avec 3 barres cadre en acier charge max 31kg 120x45x180 cm noir,Structure armoire,Penderie,0.1809694746994816,Penderie,0.0900925003972722
+Tosel olsen lampadaire acier et bois crème 1xe27 abat jour cloche acier crème 80 x 120 170 cm créme,Lampadaire liseuse,Lampadaire,0.4412740763444683,Lampadaire,0.190886148236638
+Mini four électrique avec grill 1500w plateau grill couleur blanc,Four,Mini four,0.212896882251762,Barbecue,0.1692446038255947
+Chevalet d artiste sur pieds inclinaison et hauteur réglable dim 65l x 68l x 174 230h cm bois de h tre clair,Loisirs créatifs,Tabouret,0.0821353461879486,Voilage,0.0657793532352766
+Klum meuble escalier contemporain melamine blanc brillant l 145 cm,Etagère,Meuble tv,0.2007700819302132,Bibliotheque,0.1089921140981236
+Tectake taille haie électrique 2 en 1,Taille haie,Petit outillage,0.1041260207577707,Petit outillage,0.0863286810549167
+Canapé banquette en velours sonia bleu,Friteuse,Canape droit,0.4340883690624963,Canape droit,0.2686115516799994
+Lampadaire 159 cm,Lustre,Lampadaire,0.347302953769304,Lampadaire,0.6969065825232645
+Giantex aspirateur vertical 14kpa 2 en 1 balai vapeur sans sac avec fil de 8m puissance maximale 1000w idéal pour tapis sol cap,Décapeur thermique,Aspirateur balai,0.2792120158934037,Aspirateur balai,0.1653396151190784
+Protege matelas alese blanc 160x200cm,Housse sommier,Protege matelas,0.1389807054820839,Protege matelas,0.3674171959394398
+Tron onneuse jouet pour enfant à partir de 3 ans rouge,Jeu d'imitation,Rangement enfant,0.1103951798737749,Rangement enfant,0.1166293728245529
+Giantex armoire murale salle de bain placard de rangement toilettes avec miroir meuble de rangement avec étagères à hauteur r,Miroir salle de bain,Rangement sdb,0.4677085618926148,Rangement sdb,0.3773135673946226
+Sogo ket ss 5785 r retro chauffe eau sans fil classe énergétique a rouge,Bouilloire,Chaise de bureau,0.0393067449879087,Bouilloire,0.0797861855381869
+Mixilit banc avec coffre simili cuir blanc,Banc de lit,Lit adulte,0.217717435996895,Pouf / repose pied,0.1132432665011638
+Armoire danz fonctionnelle rangement 2 portes et 2 tiroirs blanc,Commode,Armoire,0.2554411927550621,Armoire,0.1937474261634018
+Buffet nina ch ne clair et blanc 180 x42,Meuble tv,Buffet,0.3655174263279577,Buffet,0.380545222477439
+Alpexe c ble magnétique compatible apple watch série watch pour 38mm 42mm 40mm 44mm apple series 4 3 2 1 1m ,Chargeur,Acc telephonie,0.144834973439646,Montre et bracelet,0.280283860389012
+Store à fines rayures 60 x 180 cm,Voilage,Store,0.2064289358248796,Voilage,0.3159336391793257
+Lot de 2 tables basses de forme carré en métal anti éraillures de 35 cm et 40 cm noires mat en casa ,Petit meuble séjour,Table basse,0.436092674551519,Table basse,0.3846588706714492
+Kensington kensington suretrack,Clavier souris,Access. PC Tablette,0.0160878552074716,Canape droit,0.0852174539156749
+Plateau en manguier sur pied pliable,Table basse,Table,0.1745662984192821,Plateau,0.1893644906873687
+Canapé lit 2 places convertible tissu argenté,Friteuse,Canape droit,0.5994086258357422,Canape droit,0.7817314032194107
+Matelas ferme pour tous clic clac + alèse 130x190 x 15 cm avec mémoire de forme sur face hiver découpe assise 70 cm 5 zones ,Meuble à chaussures,Matelas,0.7892807518614888,Matelas,0.7443321490104062
+Fauteuil design swing noir,Pouf / repose pied,Fauteuil,0.3263882564024396,Fauteuil,0.3086314107553779
+Gobelet 37 cl,Verre,Set verre,0.072681424338504,Verre,0.1591819330738739
+Distingué ensembles de meubles ligne bangkok table et tabourets de bar 7 pcs bois d acacia massif,Chariot de courses,Tabouret,0.1646261275530917,Ens table chaises,0.1822032033690593
+Giantex ch teau gonflable pour enfants murs en maille 300x200x200cm capacité max 50kg avec zone de saut panier de basketball tob,Structure gonflable,Lit jeune,0.0830145588908758,Appareil musculation,0.0670376278981959
+Lot de 2 rideaux occultant beige 140 x 260 cm,Rideau de douche,Rideau,0.4259786701434319,Rideau,0.5368987472932341
+Smartphone 4g android 5 1 quad core dual sim 5 5 pouces 16 go noir,Mobile nu,Smartphone,0.5427738448505365,Smartphone,0.7695709283713851
+Guirlande boules LED,Objets lumineux,Guirlande lumineuse,0.3228436214623957,Guirlande lumineuse,0.2233422669590933
+Sommier à lattes 200x200 cm if 51,Cadre à lattes,Sommier,0.3500374765982513,Sommier,0.4296321132367081
+Distingué armoires et meubles de rangement edition freetown casier à bouteilles pour 20 bouteilles pinède,Rangement a poser,Boite de rangement,0.194263794082723,Boite de rangement,0.1507037819093715
+Lot de 6 petites cuillères,Couvert,Ustensiles,0.0744876792697948,Vaisselle,0.2886880167835988
+Matelas a langer aristochats matelas a langer flocons marie 50 x 70 cm,Matelas à langer,Meuble à chaussures,0.2083543996404488,Matelas,0.4532559820483234
+Lot de 2 chaises de bar scandinaves avec coussin TIKA noir ,Tabouret,Chaise,0.4953406088603493,Chaise,0.6127011926958986
+Paris prix banc design giulia 100cm bleu,Banc de lit,Table,0.0384411329013314,Bureau,0.0424589364050954
+Coussin de sol matelassé 40 x 40 cm rouge,Galette de chaise,Housse de coussin,0.360109799518832,Housse de coussin,0.3818531923263933
+Tire bouchon électrique couleur aléatoire,Autre prep culinaire,Ustensiles,0.1208784405657341,Ustensiles,0.0552614451087016
+Bosch huile adhérente biodégradable pour tron onneuses,Accessoire jardin,Pièces détachées,0.0288327486366524,Friteuse,0.0992108819101344
+Tapis vache 94 x 100 cm atmosphera,Paillasson,Tapis de Salon et Ch,0.3342788000071394,Tapis de Salon et Ch,0.3791025196727713
+Capital sports monstervest veste lestée 15 kg taille unique nylon noir,Haltère et poids,Accessoire fitness,0.0516171998833961,Drap housse,0.1587817774995853
+Protège matelas 140x190 cm 100 microfibres imperméable et etirable forme drap housse certifié ko tex ,Meuble à chaussures,Protege matelas,0.6062596047399491,Protege matelas,0.4390283074334788
+Paris prix étagère murale design riolo 94cm blanc,Bibliotheque,Etagère,0.3337793264109978,Etagère,0.3610412026022885
+Rangement avec miroir elda,Elément Haut SDB,Miroir,0.259941157581952,Miroir,0.2457157086157217
+Tapis design et moderne 80x150 cm rectangulaire unia rouge entrée adapté au chauffage par le sol,Carpette,Tapis de Salon et Ch,0.4792618302911447,Tapis de Salon et Ch,0.6154308801418498
+Five serviteur de douche 2 plateaux en bambou,Rangement sdb,Accessoire sdb,0.3049279973724427,Accessoire sdb,0.2398943988697485
+Parlux tsplit coupe fourches split ender pro 2 talavera,Autre soin personne,Lit adulte,0.0587728670917758,Canapé d'angle,0.0887963247716323
+Lot de 2 sachets de fleurs de lavande,Accessoire dressing,Accessoire sdb,0.0471023282420222,Fleurs artificielles,0.0596118071428406
+Ludi dalles uni,Parc,Ecran PC,0.0112600704997207,Jeu de société,0.0304331953613143
+2 tabourets de bar blanc doré de 60 cm cabrillo,Chaise,Tabouret,0.5824281309634426,Tabouret,0.6358989623160212
+Giantex chaise de bureau avec accoudoirs rembourrés relevable et coussin de massage support lombaire réglable pivotante noir cha,Chaise,Chaise de bureau,0.6709258128597719,Chaise de bureau,0.6815405310885198
+Tente de jardin pergola aluminium 3x3m condate gris toile rétractable et coulissante tonnelle,Pergola,Tonnelle,0.4101493077162674,Tonnelle,0.4482429367608113
+T te de lit en rotin naturel sola sommier 140 cm,Accessoire ch adulte,Lit adulte,0.2780243015414782,Tete de lit,0.6179007304806498
+Etagère de séparation bibliothèque fsc damian 16 cases décor ch ne,Accessoire ch adulte,Bibliotheque,0.651308685200106,Bibliotheque,0.7305043466009196
+Finlandek commode de chambre natti style contemporain noir mat l 110 cm,Mini commode,Commode,0.4247161173649597,Structure armoire,0.2172344076724002
+Pair coulisse porte clavier à billes en acier,Accessoire bureau,Ustensiles,0.0874029089974325,Chevet,0.075802404913171
+Fitbit bracelet connecté charge 4 nfc black black,Autre soin personne,Acc telephonie,0.0970920504893981,Acc telephonie,0.1666339921881615
+Ty rusty le raton laveur medium,Peluche,Pièces détachées,0.0130623548398397,Fauteuil,0.0479445043575323
+Décoration à poser jungle pop 35cm multicolore,Statue de jardin,Objet deco,0.1068193231178985,Papier peint,0.0897091961109671
+Cache clés clefs en fonte cache bijoux tortue 15 cm x 8 cm x 6 cm,Statue de jardin,Objet deco,0.3379759286876402,Objet deco,0.1902134043254935
+Dressing clapton 180cm coloris blanc avec 2 portes coulissantes miroirs,Structure armoire,Dressing complet,0.3875497675558326,Dressing complet,0.2290572560036159
+ recharges poubelles twist click x3 compatibles avec bac tec,Poubelle à couches,Poubelle cuisine,0.0610557890414039,Canape droit,0.0519310052334575
+Esthetique décorations edition bucarest 6 housses de chaise dos droit extensibles blanches,Housse de rangement,Objet deco,0.0905184812189289,Chaise,0.1565763100384703
+Pack complet premium lit peppa pig famille avec tiroirs et 6 cubes lit+matelas parure+couette+oreiller,Meuble à chaussures,Ensemble chambre,0.1834558467200651,Ensemble chambre,0.1641714463140052
+Commode tilda meuble de rangement chiffonnier avec 3 tiroirs en bois de paulownia brun style vintage ethnique exotique avec grav,Buffet,Commode,0.511926013370415,Commode,0.5865475351134648
+Punching ball de table,Jeu d'imitation,Accessoire fitness,0.0506607860915131,Accessoire fitness,0.085660988025669
+Songmics chaise de plage pliante avec dossier haut pliable légère confortable charge importante chaise d extérieur bleu ,Bain de soleil,Chaise de bureau,0.202664136635384,Chaise,0.3306839214907006
+Table industrielle carrée,Table basse,Table,0.2647914509383948,Table,0.4081464407403854
+Giantex 48l rouleau à gazon de jardin avec poignée en acier haute résistance rempli d eau et de sable du rouleau 32 cm i,Outils de Jardin,Bureau,0.1041204834653808,Rideau,0.1201557557653395
+Blumfeldt fontaine décorative de jardin 3w solaire led polyrésine imitation gr,Fontaine,Objet deco,0.1800844374083245,Fontaine,0.2447817403356348
+Housse à matelas 90 x 190 cm rénove matelas,Drap plat,Matelas,0.3590656686120727,Matelas,0.1901060521920755
+Lot de 2 draps housse pour matelas bébé dulce rose 70x140 cm,Drap plat,Matelas,0.2927225453616167,Drap housse,0.127210700545971
+My lovely bed surmatelas mémoire de forme 180x200 cm epaisseur 5cm déhoussable,Meuble à chaussures,Surmatelas,0.3816417936028579,Matelas,0.2420037873220162
+Rack à chaussures en bois 2 étages,Penderie,Meuble à chaussures,0.4184162763840364,Meuble à chaussures,0.4999125022047229
+Babyplane bleu,Couvert,Babyfoot,0.0341831517784559,Lit bébé,0.0554892116400254
+Fauteuil design à coque alison blanc,Ens table chaises,Fauteuil,0.3575190331256199,Fauteuil,0.2031539207482864
+Mcl tapis souris uni gris,Access. PC Tablette,Tapis de Salon et Ch,0.2323215632455296,Tapis de Salon et Ch,0.1775683629609403
+List etagère 3 plateaux,Bibliotheque,Etagère,0.4019133660918942,Etagère,0.3059799536842955
+Tableau colourful immersion 150x50,Image/affiche/poster,Toile et laminage,0.1761659633265512,Image/affiche/poster,0.1616737418929107
+Matelas best sleep 160x200 cm mousse viscoélastique gel 25cm,Meuble à chaussures,Matelas,0.5287362782566302,Matelas,0.7068741759503225
