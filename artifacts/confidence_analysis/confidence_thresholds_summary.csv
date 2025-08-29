@@ -1,6 +1,6 @@
-model,threshold,threshold_method,total_samples,overall_accuracy
-camembert_logreg,0.2873509935481022,linear_interpolation,92,0.3695652173913043
-tfidf_logreg_cleanlab,0.2463219720012585,linear_interpolation,97,0.5463917525773195
-knn_conformity,,,95,0.14736842105263157
-ensemble,0.4366235769208105,linear_interpolation,90,0.35555555555555557
-sent_emb_logreg,,,93,0.27956989247311825
+model,threshold,threshold_method,total_samples,model_correct_count,overall_accuracy,overall_accuracy_pct
+camembert_logreg,0.4300060277822799,linear_regression,92,34,0.3695652173913043,37.0%
+tfidf_logreg_cleanlab,0.2380798801130132,linear_regression,97,53,0.5463917525773195,54.6%
+knn_conformity,0.9241987879651989,linear_regression,95,14,0.14736842105263157,14.7%
+ensemble,0.4128855750699094,linear_regression,90,32,0.35555555555555557,35.6%
+sent_emb_logreg,0.528239884068244,linear_regression,93,26,0.27956989247311825,28.0%
