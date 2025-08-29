@@ -1,6 +1,6 @@
 model,equal_both_correct,total_disagreements,judged_sample_size,verdict_model,verdict_nature,verdict_both_wrong,verdict_error,model_accuracy_in_disagreements
-knn_conformity,36925,19093,10,1,9,0,0,0.1
-ensemble,44579,11439,10,3,6,1,0,0.3
-tfidf_logreg_cleanlab,46701,9317,10,4,6,0,0,0.4
-sent_emb_logreg,41355,14663,10,5,4,1,0,0.5
-camembert_logreg,39789,16229,10,7,3,0,0,0.7
+camembert_logreg,39789,16229,100,34,58,8,0,0.34
+ensemble,44579,11439,100,32,58,10,0,0.32
+knn_conformity,36925,19093,100,14,81,5,0,0.14
+sent_emb_logreg,41355,14663,100,26,67,7,0,0.26
+tfidf_logreg_cleanlab,46701,9317,100,53,44,3,0,0.53

@@ -129,14 +129,25 @@ def plot_confidence_analysis(judgments: Dict[str, pd.DataFrame],
     """Create plots for confidence analysis."""
     os.makedirs(output_dir, exist_ok=True)
     
-    # Overall accuracy vs confidence plot
-    plt.figure(figsize=(15, 10))
+    # Filter models that have valid thresholds
+    models_with_thresholds = [m for m in thresholds.keys() if thresholds[m]["threshold"] is not None]
     
-    for i, (model_name, df) in enumerate(judgments.items()):
-        if model_name not in thresholds:
-            continue
-            
-        plt.subplot(2, 3, i + 1)
+    if not models_with_thresholds:
+        print("No models with valid thresholds to plot!")
+        return pd.DataFrame()
+    
+    # Overall accuracy vs confidence plot
+    n_models = len(models_with_thresholds)
+    cols = min(3, n_models)
+    rows = (n_models + cols - 1) // cols
+    plt.figure(figsize=(5*cols, 4*rows))
+    
+    plot_idx = 1
+    for model_name in models_with_thresholds:
+        df = judgments[model_name]
+        threshold_info = thresholds[model_name]
+        
+        plt.subplot(rows, cols, plot_idx)
         
         # Filter valid judgments
         valid = df[df["verdict"].isin(["model", "nature"])].copy()
@@ -148,7 +159,7 @@ def plot_confidence_analysis(judgments: Dict[str, pd.DataFrame],
         
         # Calculate accuracy per bin
         bin_stats = []
-        for bin_name, bin_data in valid.groupby("conf_bin"):
+        for bin_name, bin_data in valid.groupby("conf_bin", observed=False):
             if len(bin_data) >= 3:
                 model_correct = (bin_data["verdict"] == "model").sum()
                 total = len(bin_data)
@@ -170,7 +181,6 @@ def plot_confidence_analysis(judgments: Dict[str, pd.DataFrame],
                    s=bin_df["count"] * 2, alpha=0.7, label=f"Bins (n={len(bin_df)})")
         
         # Add threshold line
-        threshold_info = thresholds[model_name]
         if threshold_info["threshold"] is not None:
             plt.axvline(x=threshold_info["threshold"], color='red', linestyle='--', 
                        label=f"Threshold: {threshold_info['threshold']:.3f}")
@@ -178,9 +188,14 @@ def plot_confidence_analysis(judgments: Dict[str, pd.DataFrame],
         plt.axhline(y=0.5, color='gray', linestyle='-', alpha=0.5, label="50% accuracy")
         plt.xlabel("Confidence")
         plt.ylabel("Model Accuracy")
-        plt.title(f"{model_name}\nThreshold: {threshold_info['threshold']:.3f} ({threshold_info['threshold_method']})")
+        
+        # Safe title formatting
+        threshold_str = f"{threshold_info['threshold']:.3f}" if threshold_info["threshold"] is not None else "None"
+        method_str = threshold_info["threshold_method"] if threshold_info["threshold_method"] is not None else "None"
+        plt.title(f"{model_name}\nThreshold: {threshold_str} ({method_str})")
         plt.legend()
         plt.grid(True, alpha=0.3)
+        plot_idx += 1
     
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "confidence_thresholds.png"), dpi=200, bbox_inches='tight')
