@@ -112,15 +112,23 @@ class TfidfLogRegCleanlab(BaseModel):
             if self.verbose:
                 logger.info(f"Training {self.backend} classifier...")
             # If any class has only 1 sample, SGDClassifier early_stopping's internal CV will fail.
+            # Also disable if total samples is too small for validation split.
             # Disable early_stopping in that case.
             if self.backend == "sgd":
                 class_counts = np.bincount(y)
-                if (class_counts > 0).any() and (
-                    class_counts[class_counts > 0].min() < 2
-                ):
+                total_samples = len(y)
+                min_class_count = (
+                    class_counts[class_counts > 0].min()
+                    if (class_counts > 0).any()
+                    else 0
+                )
+                # Disable early_stopping if:
+                # 1. Any class has < 2 samples, OR
+                # 2. Total samples < 10 (too small for reliable validation split)
+                if min_class_count < 2 or total_samples < 10:
                     if self.verbose:
                         logger.warning(
-                            "Detected classes with a single sample; disabling early_stopping."
+                            f"Disabling early_stopping (min_class_count={min_class_count}, total_samples={total_samples})."
                         )
                     try:
                         # Only disable early_stopping; do not change validation_fraction (must be in (0,1)).

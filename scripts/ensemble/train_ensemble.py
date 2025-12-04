@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from ensemble import EnsembleConfig, EnsemblePipeline
+from scripts.ensemble.ensemble import EnsembleConfig, EnsemblePipeline
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"

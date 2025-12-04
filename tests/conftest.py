@@ -25,19 +25,37 @@ def sample_labels():
 @pytest.fixture
 def sample_texts_multi_class():
     """Sample texts with multiple classes."""
+    # Provide more samples to avoid validation split issues in tests
     return [
         "Chaise en bois",
         "Table ronde",
         "Lampe LED",
         "Étagère blanche",
         "Ampoule 60W",
+        "Fauteuil confortable",
+        "Plafonnier moderne",
+        "Bureau en chêne",
+        "Lampe de chevet",
+        "Tabouret design",
     ]
 
 
 @pytest.fixture
 def sample_labels_multi_class():
     """Sample labels with multiple classes."""
-    return ["Mobilier", "Mobilier", "Éclairage", "Mobilier", "Éclairage"]
+    # Provide more samples to avoid validation split issues in tests
+    return [
+        "Mobilier",
+        "Mobilier",
+        "Éclairage",
+        "Mobilier",
+        "Éclairage",
+        "Mobilier",
+        "Éclairage",
+        "Mobilier",
+        "Éclairage",
+        "Mobilier",
+    ]
 
 
 @pytest.fixture

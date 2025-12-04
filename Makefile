@@ -14,21 +14,21 @@ install-dev: ## Install development dependencies
 	pip install -e .
 
 test: ## Run tests
-	pytest tests/ -v
+	python3 -m pytest tests/ -v
 
 test-cov: ## Run tests with coverage
-	pytest tests/ --cov=models --cov=scripts --cov-report=term-missing --cov-report=html
+	python3 -m pytest tests/ --cov=models --cov=scripts --cov-report=term-missing --cov-report=html
 
 lint: ## Run linters
-	ruff check .
-	black --check .
+	python3 -m ruff check .
+	python3 -m black --check .
 
 format: ## Format code
-	black .
-	ruff check --fix .
+	python3 -m black .
+	python3 -m ruff check --fix .
 
 type-check: ## Run type checker
-	mypy models/ scripts/ --ignore-missing-imports
+	python3 -m mypy models/ scripts/ --ignore-missing-imports
 
 clean: ## Clean generated files
 	find . -type d -name __pycache__ -exec rm -r {} +
@@ -40,8 +40,8 @@ clean: ## Clean generated files
 	rm -rf .coverage
 
 pre-commit: ## Install pre-commit hooks
-	pre-commit install
+	python3 -m pre_commit install
 
 pre-commit-run: ## Run pre-commit on all files
-	pre-commit run --all-files
+	python3 -m pre_commit run --all-files
 

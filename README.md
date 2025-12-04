@@ -195,15 +195,86 @@ Each model can be configured with different parameters:
 
 ### Running Tests
 
+#### Prerequisites
+
+First, install the development dependencies:
+
 ```bash
-# Run all tests
+# Install all dependencies including test tools
+pip install -r requirements-dev.txt
+
+# Or use the Makefile
+make install-dev
+```
+
+#### Running Tests
+
+**Using pytest directly:**
+
+```bash
+# Run all tests (use python3 -m pytest if pytest command not found)
+python3 -m pytest
+
+# Or if pytest is in your PATH:
 pytest
 
-# Run with coverage
-pytest --cov
+# Run with verbose output
+python3 -m pytest -v
+
+# Run with coverage report
+python3 -m pytest --cov=models --cov=scripts --cov-report=term-missing
+
+# Run with HTML coverage report (generates htmlcov/index.html)
+python3 -m pytest --cov=models --cov=scripts --cov-report=html
 
 # Run specific test file
-pytest tests/test_models/test_tfidf.py
+python3 -m pytest tests/test_models/test_tfidf.py
+
+# Run specific test function
+python3 -m pytest tests/test_models/test_tfidf.py::test_tfidf_initialization
+
+# Run tests excluding slow ones (faster)
+python3 -m pytest -m "not slow"
+
+# Run only slow tests
+python3 -m pytest -m "slow"
+```
+
+**Note:** If you get "command not found: pytest", use `python3 -m pytest` instead. This works even if pytest scripts aren't in your PATH.
+
+**Using Makefile (recommended):**
+
+```bash
+# Run all tests
+make test
+
+# Run tests with coverage
+make test-cov
+```
+
+#### Test Structure
+
+- **Fast tests**: Basic functionality, initialization, save/load
+- **Slow tests** (marked with `@pytest.mark.slow`): Full model training and evaluation
+  - These require actual model training and may take longer
+  - Examples: `test_ensemble_fit_evaluate`, `test_emb_logreg_fit_predict`
+
+#### Troubleshooting
+
+If you encounter import errors:
+```bash
+# Ensure you're in the project root directory
+cd /path/to/nricher
+
+# Verify Python path includes current directory
+python3 -c "import sys; sys.path.insert(0, '.'); from models import TfidfLogRegCleanlab; print('OK')"
+```
+
+If tests fail due to missing dependencies:
+```bash
+# Install all required packages
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
 
 ### Code Quality
