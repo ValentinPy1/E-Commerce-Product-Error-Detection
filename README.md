@@ -238,6 +238,162 @@ For detailed information about each model's architecture and training process, s
 - [Model Details](model_details.md)
 - [Ensemble Workflow](ensemble_workflow.md)
 
+## Analysis and Results
+
+After training and generating predictions, various analysis plots are available in the `artifacts/` directory. These visualizations help understand model performance, agreement patterns, and confidence characteristics.
+
+### Generating Analysis Plots
+
+```bash
+# Nature frequency vs error rate analysis
+python scripts/nature_frequency_analysis.py
+
+# Confidence threshold analysis (requires LLM judgments)
+python scripts.analyze_judgments --judgments_dir ./artifacts/llm_judgments
+```
+
+### Available Plots
+
+#### 1. Nature Frequency Error Analysis (`artifacts/analysis/nature_frequency_error_analysis.png`)
+
+This comprehensive analysis shows how model performance varies with the frequency of nature labels in the dataset.
+
+**What it shows:**
+- **Error Rate by Frequency Bin**: Bar chart showing error rates for each model across different frequency bins (Very Rare, Rare, Uncommon, Common, Very Common)
+- **Sample Count by Frequency Bin**: Distribution of samples across frequency categories
+- **Error Rate vs Average Frequency**: Scatter plot showing the relationship between label frequency and error rate
+- **Error Rate Heatmap**: Matrix visualization comparing error rates across models and frequency bins
+
+**Key Insights:**
+- Models typically perform worse on rare labels (1-10 samples) due to limited training data
+- Common labels (1000+ samples) generally show lower error rates
+- Different models may excel at different frequency ranges
+
+#### 2. Detailed Nature Error Analysis (`artifacts/analysis/detailed_nature_error_analysis.png`)
+
+Provides granular analysis of the top 20 most frequent nature labels.
+
+**What it shows:**
+- **Error Rate by Nature Label**: Bar chart showing error rates for each model on individual nature labels
+- **Frequency vs Error Rate**: Scatter plot showing how label frequency correlates with error rate for specific labels
+
+**Key Insights:**
+- Identifies which nature labels are most challenging for each model
+- Reveals labels where models consistently struggle or excel
+- Helps identify potential data quality issues or ambiguous categories
+
+#### 3. Model Prediction Agreement Heatmap (`artifacts/analysis/model_prediction_agreement_heatmap.png`)
+
+Shows how often different models agree with each other and with ground truth.
+
+**What it shows:**
+- Pairwise agreement rates between all models (including ensemble and ground truth)
+- Values range from 0 (no agreement) to 1 (perfect agreement)
+- Diagonal shows self-agreement (always 1.0)
+
+**Key Insights:**
+- High agreement between models suggests confident predictions
+- Low agreement indicates challenging samples or model diversity
+- Ensemble predictions typically show high agreement with individual models
+- Agreement with ground truth indicates overall model accuracy
+
+#### 4. Model Confidence Correlation Heatmap (`artifacts/analysis/model_confidence_correlation_heatmap.png`)
+
+Analyzes how confidence scores correlate across different models.
+
+**What it shows:**
+- Pearson correlation coefficients between confidence scores of different models
+- Values range from -1 (negative correlation) to +1 (positive correlation)
+- High positive correlation suggests models are confident on similar samples
+
+**Key Insights:**
+- Models with high confidence correlation may have similar failure modes
+- Low correlation indicates complementary confidence patterns
+- Ensemble confidence often correlates well with individual model confidences
+
+#### 5. Average Confidence When Models Agree (`artifacts/analysis/avg_conf_when_agree.png`)
+
+Shows the average confidence of each model when it agrees with another model.
+
+**What it shows:**
+- Heatmap where each cell (A, B) represents the average confidence of model B when it agrees with model A
+- Higher values (greener) indicate higher confidence during agreement
+
+**Key Insights:**
+- Models tend to be more confident when they agree with other models
+- Helps identify which model pairs have the most confident agreements
+- Useful for understanding ensemble behavior
+
+#### 6. Average Confidence When Models Disagree (`artifacts/analysis/avg_conf_when_disagree.png`)
+
+Shows the average confidence of each model when it disagrees with another model.
+
+**What it shows:**
+- Heatmap where each cell (A, B) represents the average confidence of model B when it disagrees with model A
+- Lower values (lighter orange) suggest the model is less confident when disagreeing
+
+**Key Insights:**
+- Models are typically less confident when they disagree
+- Helps identify cases where high-confidence disagreements occur (potential errors)
+- Useful for detecting systematic biases or data quality issues
+
+#### 7. Standalone Model Performance (`artifacts/analysis/models_standalone_correct.png` and `models_standalone_wrong.png`)
+
+Shows examples where individual models are correct or incorrect while others agree with ground truth.
+
+**What it shows:**
+- **Correct**: Cases where a model is right while others are wrong
+- **Wrong**: Cases where a model is wrong while others are right
+
+**Key Insights:**
+- Identifies unique strengths of each model
+- Reveals failure modes specific to certain models
+- Helps understand model complementarity
+
+#### 8. Confidence Thresholds Analysis (`artifacts/confidence_analysis/confidence_thresholds.png`)
+
+Analyzes confidence thresholds for trusting model predictions in disagreements (requires LLM judgments).
+
+**What it shows:**
+- Accuracy vs confidence plots for each model
+- Linear regression fit showing the relationship
+- Confidence threshold where model accuracy crosses 50% (or target threshold)
+- 90% confidence intervals for accuracy estimates
+
+**Key Insights:**
+- Identifies confidence levels where models are reliable
+- Helps set thresholds for automated decision-making
+- Shows which models maintain accuracy at lower confidence levels
+- Thresholds indicate when to trust model predictions over ground truth labels
+
+**Interpretation:**
+- If threshold is 0.7, predictions with confidence > 0.7 are more likely correct than ground truth
+- Lower thresholds indicate more reliable models
+- Models with no threshold never reach target accuracy in disagreements
+
+### Understanding the Results
+
+**High Agreement + High Confidence**: These are the most reliable predictions. The ensemble and individual models agree, and they're confident.
+
+**High Agreement + Low Confidence**: Models agree but are uncertain. These may be edge cases or ambiguous samples.
+
+**Low Agreement**: Models disagree, indicating challenging samples. The ensemble average often helps in these cases.
+
+**Rare Labels**: Models typically struggle with labels that appear infrequently. Consider:
+- Collecting more training data for rare categories
+- Using data augmentation techniques
+- Adjusting class weights during training
+
+**Confidence Patterns**: Models that show high confidence correlation may have similar biases. Diversifying the ensemble helps.
+
+### Using Results for Model Improvement
+
+1. **Identify Problematic Labels**: Use detailed nature analysis to find consistently misclassified labels
+2. **Adjust Training Data**: Focus on collecting more examples for rare or problematic categories
+3. **Tune Model Selection**: Use agreement patterns to select the best model combination
+4. **Set Confidence Thresholds**: Use confidence analysis to implement quality gates in production
+5. **Error Analysis**: Examine standalone wrong examples to understand model-specific failure modes
+
 ## Contributing
 
 1. Fork the repository
