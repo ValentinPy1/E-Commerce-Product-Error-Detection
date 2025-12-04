@@ -1,8 +1,12 @@
+"""Model implementations for text classification."""
+
 from .base import BaseModel
-from .tfidf_logreg_cleanlab import TfidfLogRegCleanlab
-from .emb_logreg import SentenceEmbLogReg
 from .camembert_logreg import CamembertLogReg
+from .emb_logreg import SentenceEmbLogReg
 from .knn_conformity import KNNConformity
+from .tfidf_logreg_cleanlab import TfidfLogRegCleanlab
+
+__version__ = "0.1.0"
 
 __all__ = [
     "BaseModel",
@@ -11,5 +15,3 @@ __all__ = [
     "CamembertLogReg",
     "KNNConformity",
 ]
-
-

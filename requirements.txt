@@ -1,11 +1,20 @@
-scikit-learn>=1.2
-scipy>=1.10
-numpy>=1.23
-pandas>=2.0
-tokenizers>=0.14
-sentence-transformers>=2.2
-transformers>=4.40
-torch>=2.1
-cleanlab>=2.6
+# Core ML libraries
+scikit-learn>=1.2,<2.0
+scipy>=1.10,<2.0
+numpy>=1.23,<2.0
+pandas>=2.0,<3.0
 
+# NLP and transformers
+tokenizers>=0.14,<1.0
+sentence-transformers>=2.2,<3.0
+transformers>=4.40,<5.0
+torch>=2.1,<3.0
+
+# Label noise handling
+cleanlab>=2.6,<3.0
+
+# Utilities
+python-dotenv>=1.0,<2.0
+tqdm>=4.65,<5.0
+tenacity>=8.0,<9.0
 
