@@ -1,0 +1,28 @@
+# Large model files
+*.joblib
+artifacts/models/**/*.joblib
+
+# Large data files
+data/data.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Environment
+.env
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
