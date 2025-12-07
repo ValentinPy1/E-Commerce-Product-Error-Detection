@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 import time
 from pathlib import Path
-from typing import Sequence as Seq, Optional
+from typing import Sequence as Seq
 
 import joblib
 import numpy as np
@@ -128,7 +128,9 @@ class TfidfLogRegCleanlab(BaseModel):
                 if min_class_count < 2 or total_samples < 10:
                     if self.verbose:
                         logger.warning(
-                            f"Disabling early_stopping (min_class_count={min_class_count}, total_samples={total_samples})."
+                            f"Disabling early_stopping "
+                            f"(min_class_count={min_class_count}, "
+                            f"total_samples={total_samples})."
                         )
                     try:
                         # Only disable early_stopping; do not change validation_fraction (must be in (0,1)).
@@ -210,5 +212,3 @@ class TfidfLogRegCleanlab(BaseModel):
         obj.classes_ = data["classes"]
         obj.backend = data.get("backend", "sgd")
         return obj
-
-

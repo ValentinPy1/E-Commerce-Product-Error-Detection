@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import logging
 import time
-from pathlib import Path
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, List, Sequence as Seq
 
 import numpy as np
@@ -324,5 +324,3 @@ class EnsemblePipeline:
             "avg_prob_accuracy": float(acc_avg),
             "avg_prob_precision_weighted": float(prec_avg),
         }
-
-

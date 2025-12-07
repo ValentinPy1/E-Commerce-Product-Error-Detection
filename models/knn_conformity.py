@@ -21,9 +21,12 @@ logger = logging.getLogger(__name__)
 
 class KNNConformity(BaseModel):
     """
-    Non-parametric model that computes conformity score: fraction of k nearest neighbors sharing the predicted label.
+    Non-parametric model that computes conformity score.
+
+    Computes fraction of k nearest neighbors sharing the predicted label.
     Uses sentence embeddings.
     """
+
     def __init__(
         self,
         model_name: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
@@ -84,7 +87,10 @@ class KNNConformity(BaseModel):
         proba = np.zeros((len(texts), num_classes), dtype=np.float64)
         for i in range(len(texts)):
             counts = np.bincount(y_neighbors[i], minlength=num_classes)
-            proba[i] = counts / counts.sum() if counts.sum() > 0 else np.ones(num_classes) / num_classes
+            if counts.sum() > 0:
+                proba[i] = counts / counts.sum()
+            else:
+                proba[i] = np.ones(num_classes) / num_classes
         return proba
 
     def predict(self, texts: Seq[str]) -> np.ndarray:
@@ -123,7 +129,8 @@ class KNNConformity(BaseModel):
                 if encoder_name is None:
                     auto_model = getattr(fm, "auto_model", None)
                     if auto_model is not None:
-                        encoder_name = getattr(auto_model, "name_or_path", None)
+                        encoder_name = getattr(
+                            auto_model, "name_or_path", None)
                         if encoder_name is None:
                             cfg = getattr(auto_model, "config", None)
                             if cfg is not None:
@@ -172,5 +179,3 @@ class KNNConformity(BaseModel):
         # Refit NN index
         obj.nn.fit(obj._train_embeddings)
         return obj
-
-
